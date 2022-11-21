@@ -13,6 +13,7 @@ class Seagull (Context, event.Event):
         self.verbs['chase'] = self
         self.verbs['feed'] = self
         self.verbs['help'] = self
+        self.verbs['kill'] = self
         self.result = {}
         self.go = False
 
@@ -32,6 +33,13 @@ class Seagull (Context, event.Event):
                     self.result["message"] = c.get_name() + " is attacked by the seagulls."
                     if (c.inflict_damage (self.seagulls, "Pecked to death by seagulls")):
                         self.result["message"] = ".. " + c.get_name() + " is pecked to death by the seagulls!"
+        if (verb == "kill"):
+            self.go = True
+            self.result["newevents"].append (Seagull())
+            self.result["message"] = "You killed the seagulls and procured food."
+            
+            
+                
 
         elif (verb == "feed"):
             self.seagulls = self.seagulls + 1
@@ -42,8 +50,10 @@ class Seagull (Context, event.Event):
             print ("the seagulls will pester you until you feed them or chase them off")
             self.go = False
         else:
-            print ("it seems the only options here are to feed or chase")
+            print ("it seems the only options here are to feed or chase or kill")
             self.go = False
+
+            
 
 
 

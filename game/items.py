@@ -5,6 +5,7 @@ class Item():
         self.name = name
         self.value = value
         self.damage = (0,0)
+        self.foodStore = (0,0)
         self.firearm = False
         self.charge = False
         self.skill = None
@@ -38,3 +39,9 @@ class Flintlock(Item):
         self.verb = "shoot"
         self.verb2 = "shoots"
 
+class Food(Item):
+    def __init__(self):
+        super().__init__("Food", 0) #Note: price is in shillings (a silver coin, 20 per pound)
+        self.verb = "eat"
+        self.verb2 = "eats"
+        self.foodStore = (30,50)
