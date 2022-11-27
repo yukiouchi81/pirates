@@ -1,6 +1,7 @@
 from game import event
 from game.player import Player
 from game.context import Context
+from game.crewmate import CrewMate
 import game.config as config
 import random
 
@@ -37,9 +38,9 @@ class Seagull (Context, event.Event):
             self.go = True
             self.result["newevents"].append (Seagull())
             self.result["message"] = "You killed the seagulls and procured food."
+
             
             
-                
 
         elif (verb == "feed"):
             self.seagulls = self.seagulls + 1

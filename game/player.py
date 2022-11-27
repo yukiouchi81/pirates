@@ -36,9 +36,12 @@ class Player (Context):
             else:
                 itm = Cutlass()
             self.inventory.append(itm)
+        self.inventory.append(Food())
+        self.inventory.append(Tent())
         self.inventory.sort()
 
-        n = random.randrange(3,7)
+        # number of pirates
+        n = random.randrange(4,8)
         for i in range (0,n):
             c = CrewMate()
             self.pirates.append (c)
@@ -54,7 +57,8 @@ class Player (Context):
         self.verbs['inventory'] = self
         self.verbs['restock'] = self
         self.verbs['skills'] = self
-
+        self.verbs['eat'] = self
+        
         self.seen = []
         for i in range (0, self.world.worldsize):
             self.seen.append ([])
@@ -105,6 +109,11 @@ class Player (Context):
         elif (verb == "status"):
             announce ("Day " + str(self.world.get_day()),pause=False)
             self.status()
+        #elif (verb == "eat"):
+          #  if 'Food' in self.inventory:
+          
+                
+                
         elif (verb == "go"):
             self.go = True
             if (len(cmd_list) > 1):

@@ -41,7 +41,15 @@ class Flintlock(Item):
 
 class Food(Item):
     def __init__(self):
-        super().__init__("Food", 0) #Note: price is in shillings (a silver coin, 20 per pound)
+        super().__init__("Food", 50) #Note: price is in shillings (a silver coin, 20 per pound)
         self.verb = "eat"
         self.verb2 = "eats"
         self.foodStore = (30,50)
+
+class Tent(Item):
+    def __init__(self):
+        super().__init__("Tent", 150) #Note: price is in shillings (a silver coin, 20 per pound)
+        self.verb = "Rest"
+        self.verb2 = "Sleep"
+        self.foodStore = (30,50)
+        self.damege = (-20,-30)

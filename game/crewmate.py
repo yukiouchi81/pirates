@@ -10,7 +10,11 @@ class CrewMate(Context):
     '''Describes a pirate crewmate. The player controls these.'''
 
     # possible_names = ['alice', 'bob', 'charlie', 'darren', 'eliza', 'francine', 'gale', 'hope']
-    possible_names = ['anne', 'bartholomew', 'benjamin', 'po', 'eliza', 'edward', 'grace', 'henry', 'mary', 'paulsgrave', 'jack', 'turgut', 'william', 'sayyida', 'emanuel', 'peter', 'richard', 'yang']
+    possible_names = ['American', 'French', 'Canadian', 'Spanish', 'Japanese', 'Italian', 'Korean', 'Taiwanese', 'Mexican',
+                      'Nepali', 'Indian', 'Pakistani', 'German', 'Portuguese', 'British', 'Australian', 'Finnish', 'Irish',
+                      'Swedish', 'Dutch', 'Swiss', 'Greek', 'Croatian', 'Russian', 'Polish', 'Brazilian', 'Turkish',
+                      'Bangladeshi', 'Chinese', 'Cambodian', 'Vietnamese', 'Egyptian', 'Ivorian', 'Nigerian', 'Ethiopian', 'South African',
+                      'Ukrainian', 'Danish', 'Colombian', 'Indonesian', 'Philipino', 'Saudi Arabian']
     longest_name = max([len(c) for c in possible_names] )
     
     def __init__ (self):
@@ -35,6 +39,7 @@ class CrewMate(Context):
         self.items = []
         self.items.append(Cutlass())
         self.items.append(Flintlock())
+        self.items.append(Food())
         self.powder = 32
 
         #Status effects
@@ -162,7 +167,7 @@ class CrewMate(Context):
             print (self.name + " doesn't know how to " + verb)
 
     def print_inventory (self):
-        for i in self.items:
+        for i in len(self.items):
             print (i)
         print ()
 
