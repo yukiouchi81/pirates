@@ -3,6 +3,7 @@ from game.player import Player
 from game.context import Context
 from game.crewmate import CrewMate
 import game.config as config
+import game.ship as ship
 import random
 
 class Seagull (Context, event.Event):
@@ -38,7 +39,11 @@ class Seagull (Context, event.Event):
             self.go = True
             self.result["newevents"].append (Seagull())
             self.result["message"] = "You killed the seagulls and procured food."
-            #increase food stores
+            amt = random.randint(10,16)
+            ship_food = config.the_player.ship
+            ship_food.food =  ship_food.food + amt
+            #increase food stores from seagull
+    
             
             
 

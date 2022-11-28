@@ -37,7 +37,6 @@ class Player (Context):
             else:
                 itm = Cutlass()
             self.inventory.append(itm)
-        self.inventory.append(Food())
         self.inventory.sort()
 
         # number of pirates
@@ -58,6 +57,8 @@ class Player (Context):
         self.verbs['restock'] = self
         self.verbs['skills'] = self
         self.verbs['cure'] = self
+        self.verbs['sleep'] = self
+        self.verbs['rest'] = self
         
         
         self.seen = []
@@ -134,7 +135,14 @@ class Player (Context):
                 crwemate.CrewMate().receive_medicine(1)
             else:
                 announce("You don't have any item to cure the crewmate.")
+         """elif (verb == 'sleep') or (verb == 'rest') :
+            if 'tent' in self.inventory:
                 
+                
+            else:
+                announce("You cannot do that command without a tent.")
+                
+                """
             
         else:
             announce ("Error: Player object does not understand verb " + verb)

@@ -12,7 +12,7 @@ class Ship (Context):
         super().__init__()
         self.hx = 0
         self.hy = 0
-        self.medicine = 5
+        self.medicine = 0
         self.food = 100
         self.loc = None
 

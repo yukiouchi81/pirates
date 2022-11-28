@@ -51,4 +51,10 @@ class Medicine(Item):
         super().__init__("Medicine", 250) #Note: price is in shillings (a silver coin, 20 per pound)
         self.verb = "Cure"
         self.verb2 = "Heal"
+
+class Tent(Item):
+    def __init__(self):
+        super().__init__("Tent", 250) #Note: price is in shillings (a silver coin, 20 per pound)
+        self.verb = "Sleep"
+        self.verb2 = "Rest"
        
