@@ -82,20 +82,24 @@ class Combat():
             roll = random.randrange(100)
             if moving.lucky == True:
                 roll = min(roll, random.randrange(100))
-            if roll < chosen_attk.success:
+            if roll < chosen_attk.success + 10:
                 announce (moving.name + " " + chosen_attk.description + " " + chosen_target.name + "!")
                 damage = random.randrange(chosen_attk.damage_range[0],chosen_attk.damage_range[1]+1)
                 deathcause = "slain by a " + moving.name + "'s " + chosen_attk.name
                 chosen_target.inflict_damage(damage, deathcause)
                 if chosen_target.health <= 0:
                     announce (chosen_target.name + " is killed!")
-
+                else:
+                    announce ("Remaining HP of "+chosen_target.name + ": " + str(chosen_target.health))
+                
                     
-            elif (roll == chosen_attk.success):
+            elif (roll == chosen_attk.success +10):
                 announce (moving.name + " barely misses " + chosen_target.name + "!")
             else:
                 announce (moving.name + " misses " + chosen_target.name + ".")
             self.monsters = [m for m in self.monsters if m.health >0]
+
+        
 
 class Monster:
     def __init__ (self, name, hp, attacks, speed):

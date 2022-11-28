@@ -55,7 +55,8 @@ class World (Context):
         self.locs[self.startx][self.starty+1] = testland
 
         self.events = []
-        self.events.append (lucky.LuckyDay())
+        self.events.append (nothing.Nothing())
+        self.events.append (nothing.Nothing())
         self.events.append (nothing.Nothing())
         self.events.append (seagull.Seagull())
         self.events.append (sickness.Sickness())
