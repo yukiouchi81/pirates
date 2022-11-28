@@ -135,18 +135,23 @@ class Player (Context):
                 crwemate.CrewMate().receive_medicine(1)
             else:
                 announce("You don't have any item to cure the crewmate.")
-         """elif (verb == 'sleep') or (verb == 'rest') :
+
+            
+        elif (verb == 'sleep') or (verb == 'rest') :
+            amt = random.randint(20,30)
             if 'tent' in self.inventory:
-                
-                
+                announce ("Crew members had a peaceful rest and.")
+                crewmate.CrewMate().health = crewmate.CrewMate().health + amt
+                    
             else:
-                announce("You cannot do that command without a tent.")
+                announce("You need a tent to do that.")
                 
-                """
             
         else:
             announce ("Error: Player object does not understand verb " + verb)
             pass
+
+
 
     @staticmethod
     def get_interaction (contexts):
