@@ -2,6 +2,7 @@
 from re import I
 from game.ship import *
 from game.context import Context
+from game.crewmate import CrewMate
 import jsonpickle
 from game.display import announce
 import game.config as config
@@ -37,7 +38,6 @@ class Player (Context):
                 itm = Cutlass()
             self.inventory.append(itm)
         self.inventory.append(Food())
-        self.inventory.append(Tent())
         self.inventory.sort()
 
         # number of pirates
@@ -57,7 +57,8 @@ class Player (Context):
         self.verbs['inventory'] = self
         self.verbs['restock'] = self
         self.verbs['skills'] = self
-        self.verbs['eat'] = self
+        self.verbs['cure'] = self
+        
         
         self.seen = []
         for i in range (0, self.world.worldsize):
@@ -109,10 +110,6 @@ class Player (Context):
         elif (verb == "status"):
             announce ("Day " + str(self.world.get_day()),pause=False)
             self.status()
-        #elif (verb == "eat"):
-          #  if 'Food' in self.inventory:
-          
-                
                 
         elif (verb == "go"):
             self.go = True
@@ -132,6 +129,13 @@ class Player (Context):
                     else:
                         announce("There's nowhere to go ashore.")
                         self.go = False
+        elif (verb == 'cure'):
+            if 'medicine' in self.inventory:
+                crwemate.CrewMate().receive_medicine(1)
+            else:
+                announce("You don't have any item to cure the crewmate.")
+                
+            
         else:
             announce ("Error: Player object does not understand verb " + verb)
             pass

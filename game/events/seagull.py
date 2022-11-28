@@ -38,7 +38,7 @@ class Seagull (Context, event.Event):
             self.go = True
             self.result["newevents"].append (Seagull())
             self.result["message"] = "You killed the seagulls and procured food."
-
+            #increase food stores
             
             
 

@@ -44,12 +44,11 @@ class Food(Item):
         super().__init__("Food", 50) #Note: price is in shillings (a silver coin, 20 per pound)
         self.verb = "eat"
         self.verb2 = "eats"
-        self.foodStore = (30,50)
+       # self.foodStore = (30,50)
 
-class Tent(Item):
+class Medicine(Item):
     def __init__(self):
-        super().__init__("Tent", 150) #Note: price is in shillings (a silver coin, 20 per pound)
-        self.verb = "Rest"
-        self.verb2 = "Sleep"
-        self.foodStore = (30,50)
-        self.damege = (-20,-30)
+        super().__init__("Medicine", 250) #Note: price is in shillings (a silver coin, 20 per pound)
+        self.verb = "Cure"
+        self.verb2 = "Heal"
+       
