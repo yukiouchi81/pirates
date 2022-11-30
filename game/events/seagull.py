@@ -39,7 +39,7 @@ class Seagull (Context, event.Event):
             self.go = True
             self.result["newevents"].append (Seagull())
             self.result["message"] = "You killed the seagulls and procured food."
-            amt = random.randint(15,25)
+            amt = random.randint(12,16)
             ship_food = config.the_player.ship
             ship_food.food =  ship_food.food + amt
             #increase food stores from seagull

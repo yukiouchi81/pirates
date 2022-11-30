@@ -55,12 +55,13 @@ class World (Context):
         self.locs[self.startx][self.starty+1] = testland
 
         self.events = []
-        self.events.append (nothing.Nothing())
-        self.events.append (nothing.Nothing())
-        self.events.append (nothing.Nothing())
-        self.events.append (seagull.Seagull())
-        self.events.append (sickness.Sickness())
-        self.events.append (drowned_pirates.DrownedPirates())
+        #self.events.append (nothing.Nothing())
+        #self.events.append (nothing.Nothing())
+        #self.events.append (seagull.Seagull())
+        #self.events.append (sickness.Sickness())
+        #self.events.append (man_eating_monkeys.ManEatingMonkeys())
+        self.events.append (giant_monster_squid.GiantMonsterSquid())
+        #self.events.append (drowned_pirates.DrownedPirates())
         self.nouns["world"] = self
 
     def get_day (self):
@@ -71,7 +72,7 @@ class World (Context):
 #        announce ("starting day " + str(self.day))
         
         if self.day > 1:
-            num_events = random.randint (0,2)
+            num_events = 1
             random.shuffle (self.events)
             for i in range (0, num_events):
                 today_event = self.events.pop()
