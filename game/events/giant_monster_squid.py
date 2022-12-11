@@ -20,9 +20,9 @@ class GiantMonsterSquid(event.Event):
             n += 1
         announce ("The crew is attacked by a giant monster squid!")
         Combat(monsters).combat()
-        result["newevents"] = [ self ]
+        result["newevents"] = []
         return result
-
+        #config.the_player.ship.food += n_appearing*2
 
 
 

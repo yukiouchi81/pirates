@@ -37,6 +37,7 @@ class Beach_with_ship (location.SubLocation):
         self.event_chance = 50
         self.events.append (seagull.Seagull())
         self.events.append(drowned_pirates.DrownedPirates())
+        
 
     def enter (self):
         announce ("arrive at the beach. Your ship is at anchor in a small bay to the south.")
@@ -67,7 +68,7 @@ class Trees (location.SubLocation):
         self.item_in_clothes = Flintlock()
 
         self.event_chance = 50
-        self.events.append(man_eating_monkeys.ManEatingMonkeys())
+     #   self.events.append(man_eating_monkeys.ManEatingMonkeys())
         self.events.append(drowned_pirates.DrownedPirates())
 
     def enter (self):

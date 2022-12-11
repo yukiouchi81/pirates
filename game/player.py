@@ -40,7 +40,7 @@ class Player (Context):
         self.inventory.sort()
 
         # number of pirates
-        n = random.randrange(4,8)
+        n = random.randrange(5,8)
         for i in range (0,n):
             c = CrewMate()
             self.pirates.append (c)
@@ -130,21 +130,19 @@ class Player (Context):
                     else:
                         announce("There's nowhere to go ashore.")
                         self.go = False
-        elif (verb == 'cure'):
-            if 'medicine' in self.inventory:
-                crwemate.CrewMate().receive_medicine(1)
-            else:
-                announce("You don't have any item to cure the crewmate.")
 
             
         elif (verb == 'sleep') or (verb == 'rest') :
             amt = random.randint(20,30)
             if 'tent' in self.inventory:
-                announce ("Crew members had a peaceful rest and.")
+                announce ("Crew members had a peaceful rest and recovered from sickness.")
                 crewmate.CrewMate().health = crewmate.CrewMate().health + amt
-                    
+                for i in self.pirates:
+                    i.set_sickness (False)
+                
+                config.the_player.ship.nappod -= 1
             else:
-                announce("You need a tent to do that.")
+                announce("You need a nap pod to do that.")
                 
             
         else:

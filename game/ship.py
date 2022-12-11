@@ -12,7 +12,8 @@ class Ship (Context):
         super().__init__()
         self.hx = 0
         self.hy = 0
-        self.medicine = 0
+        self.medicine = 10
+        self.nappod = 0
         self.food = 100
         self.loc = None
 
@@ -60,7 +61,7 @@ class Ship (Context):
         if ((self.hx==0) and (self.hy==0)):
             print ("ship anchored")
         elif ((self.hx == 1) and (self.hy == 0)):
-            print ("ship heading is east")
+            print ("ship heading is eas st")
         elif ((self.hx == -1) and (self.hy == 0)):
             print ("ship heading is west")
         elif ((self.hx == 0) and (self.hy == -1)):
