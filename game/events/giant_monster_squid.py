@@ -27,7 +27,7 @@ class GiantMonsterSquid(event.Event):
         amt = 1
         ship = config.the_player.ship
         ship.key =  ship.key + amt
-        result["message"] = "There's something by the monster's corpse ... you obtained a kay!!"
+        result["message"] = "There's something by the monster's corpse ... you obtained a key!!"
         
         
         return result

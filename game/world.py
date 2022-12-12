@@ -53,20 +53,25 @@ class World (Context):
 
         #Test island: always start off next to a test island. Swap in your island to test yours.
         testIsland= underwaterempire.UnderwaterEmpire (self.startx, self.starty+1, self)
+
         self.locs[self.startx][self.starty+1] = testIsland
 
         self.events = []
-        #self.events.append(merfolk.Merfolk())
         self.events.append (nothing.Nothing())
-        #self.events.append (nothing.Nothing())
-        #self.events.append (seagull.Seagull())
-        #self.events.append (sickness.Sickness())
-        #self.events.append (man_eating_monkeys.ManEatingMonkeys())
-        #self.events.append (giant_monster_squid.GiantMonsterSquid())
-        #self.events.append (drowned_pirates.DrownedPirates())
-        #self.events.append (shark.Shark())
+        self.events.append (nothing.Nothing())
+        self.events.append (nothing.Nothing())
+        self.events.append (nothing.Nothing())
+        self.events.append (seagull.Seagull())
+        self.events.append (seagull.Seagull())
+        self.events.append (sickness.Sickness())
+        self.events.append (lucky.LuckyDay())
+        self.events.append (lucky.LuckyDay())
+        self.events.append (drowned_pirates.DrownedPirates())
         
         self.nouns["world"] = self
+        
+    def get_manual(self):
+        print( "\nYour ship and crew members left your home port in serch of treasures.\nCollect treasures and come back alive!!\nBasic commands : 'go + direction' / 'map' / 'inventory' / 'go ashore'\n")
 
     def get_day (self):
         return self.day
@@ -95,7 +100,7 @@ class World (Context):
 
 
     def end_day (self):
-#        announce ("ending day " + str(self.day))
+        #announce ("ending day " + str(self.day))
         
         # ship knows where it is
         action = self.ship.end_day(self)

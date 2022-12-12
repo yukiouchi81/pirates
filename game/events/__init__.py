@@ -4,4 +4,4 @@ __all__ = ["drowned_pirates",
 "man_eating_monkeys",
 "nothing",
 "sickness",
-"seagull","giant_monster_squid","shark","merfolk"]
+"seagull","giant_monster_squid","shark","merfolk","fish"]

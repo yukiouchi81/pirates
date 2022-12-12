@@ -25,7 +25,7 @@ class UnderwaterEmpire(location.Location):
         self.locations["treasure room"] =TreasureRoom(self)
         
     def enter(self, ship):
-        print("You found the entrance to an underground empire, what is your command?")
+        print("\nYou found the underground empire.")
 
     def visit (self):
         config.the_player.location = self.starting_location
@@ -38,10 +38,20 @@ class Beach_with_ship (location.SubLocation):
         self.name = "beach"
         self.verbs['north'] = self
         self.verbs['south'] = self
+        self.verbs['west'] = self
+        self.verbs['east'] = self
+        self.verbs['give'] = self
         
-        self.event_chance = 50
-        self.events.append (seagull.Seagull())
-        #self.events.append(drowned_pirates.DrownedPirates())
+        
+        self.event_chance = 100
+        self.events.append (fish.Fish())
+        self.events.append (fish.Fish())
+        self.events.append (nothing.Nothing())
+        self.events.append (nothing.Nothing())
+        self.events.append (nothing.Nothing())
+        self.events.append (sickness.Sickness())
+        self.events.append (lucky.LuckyDay())
+       
 
     def enter (self):
         announce ("arrive at the beach. Your ship is at anchor in a small bay to the south.")
@@ -54,15 +64,26 @@ class Beach_with_ship (location.SubLocation):
         elif (verb == "north"):
             config.the_player.next_loc = self.main_location.locations["hunting ground"]
             announce ("You entered the new area of the empire.")
-        elif(verb == "east"):
-            config.the_player.next_loc = self.main_location.locations["shark habitat"]
-            announce ("You entered the new area of the empire.")
-        elif(verb == "west"):
-            config.the_player.next_loc = self.main_location.locations["merfolk's dwelling"]
-            announce ("You entered the new area of the empire.")
-
+        elif (verb == "west"):
+            announce ("You walked all the way to the west, but there is nothing interesting.")
+        elif (verb == "east"):
+            announce ("You walked all the way to the east, but there is nothing interesting.")
         
-            
+        elif (verb == "give"):
+            # give medicine to crewmember
+            if (len(cmd_list) > 3):
+                if ((cmd_list[1] == "medicine") and (cmd_list[3] in nouns.keys())):
+                    if (Ship().medicine > 0):
+                        nouns[cmd_list[3]].receive_medicine(1)
+                        Ship().medicine =  Ship().medicine - 1
+                    else:
+                        announce ("no more medicine to give")
+            else:
+                announce ("Give medicine to who?")
+        else:
+            announce ("Error: Ship object doe not understand verb " + verb)
+        
+       
 class HuntingGround(location.SubLocation):
     def __init__ (self, m):
         super().__init__(m)
@@ -71,10 +92,16 @@ class HuntingGround(location.SubLocation):
         self.verbs['east'] = self
         self.verbs['north'] = self
         self.verbs['west'] = self
+        self.verbs['give'] = self
+
 
         self.event_chance = 50
-        self.events.append (seagull.Seagull())
-        #self.events.append(drowned_pirates.DrownedPirates())
+        self.events.append (man_eating_monkeys.ManEatingMonkeys())
+        self.events.append (man_eating_monkeys.ManEatingMonkeys())
+        self.events.append (fish.Fish())
+        self.events.append (nothing.Nothing())
+        self.events.append (sickness.Sickness())
+        self.events.append (lucky.LuckyDay())
 
     def enter(self):
         announce('"Hunting Ground"')
@@ -93,7 +120,19 @@ class HuntingGround(location.SubLocation):
             config.the_player.next_loc = self.main_location.locations["beach"]
             announce ("You return to the beach..")
         
-            
+        elif (verb == "give"):
+            # give medicine to crewmember
+            if (len(cmd_list) > 3):
+                if ((cmd_list[1] == "medicine") and (cmd_list[3] in nouns.keys())):
+                    if (Ship().medicine > 0):
+                        nouns[cmd_list[3]].receive_medicine(1)
+                        Ship().medicine =  Ship().medicine - 1
+                    else:
+                        announce ("no more medicine to give")
+            else:
+                announce ("Give medicine to who?")
+        else:
+            announce ("Error: Ship object doe not understand verb " + verb)
 
 class Merfolk_dwelling (location.SubLocation):
     def __init__ (self, m):
@@ -104,10 +143,13 @@ class Merfolk_dwelling (location.SubLocation):
         self.verbs['east'] = self
         self.verbs['north'] = self
         self.verbs['south'] = self
-        
+        self.verbs['give'] = self
         
         self.event_chance = 100
         self.events.append(merfolk.Merfolk())
+        #self.events.append (fish.Fish())
+        #self.events.append (nothing.Nothing())
+
     def enter(self):
         announce('"Dwelling of Merfolk"')
 
@@ -123,6 +165,19 @@ class Merfolk_dwelling (location.SubLocation):
             announce ("You entered the new area of the empire.")
         elif(verb == "south"):
             announce ("It seems there is no south in this area")
+        elif (verb == "give"):
+            # give medicine to crewmember
+            if (len(cmd_list) > 3):
+                if ((cmd_list[1] == "medicine") and (cmd_list[3] in nouns.keys())):
+                    if (Ship().medicine > 0):
+                        nouns[cmd_list[3]].receive_medicine(1)
+                        Ship().medicine =  Ship().medicine - 1
+                    else:
+                        announce ("no more medicine to give")
+            else:
+                announce ("Give medicine to who?")
+        else:
+            announce ("Error: Ship object doe not understand verb " + verb)
         
 class SharkHabitat (location.SubLocation):
     def __init__ (self, m):
@@ -133,9 +188,12 @@ class SharkHabitat (location.SubLocation):
         self.verbs['east'] = self
         self.verbs['north'] = self
         #self.verbs['south'] = self
+        self.verbs['give'] = self
         
         self.event_chance = 30
         self.events.append(shark.Shark())
+        self.events.append(shark.Shark())
+        self.events.append (fish.Fish())
     def enter(self):
         announce('"Shark Habitat"')
 
@@ -150,6 +208,19 @@ class SharkHabitat (location.SubLocation):
         elif(verb == "north"):
             config.the_player.next_loc = self.main_location.locations["deep water"]
             announce ("You entered the new area of the empire.")
+        elif (verb == "give"):
+            # give medicine to crewmember
+            if (len(cmd_list) > 3):
+                if ((cmd_list[1] == "medicine") and (cmd_list[3] in nouns.keys())):
+                    if (Ship().medicine > 0):
+                        nouns[cmd_list[3]].receive_medicine(1)
+                        Ship().medicine =  Ship().medicine - 1
+                    else:
+                        announce ("no more medicine to give")
+            else:
+                announce ("Give medicine to who?")
+        else:
+            announce ("Error: Ship object doe not understand verb " + verb)
         
 class DeepWater (location.SubLocation):
     def __init__ (self, m):
@@ -159,21 +230,25 @@ class DeepWater (location.SubLocation):
         self.verbs['east'] = self
         self.verbs['north'] = self
         self.verbs['south'] = self
+        self.verbs['give'] = self
         
         
         self.event_chance = 100
         self.events.append(giant_monster_squid.GiantMonsterSquid())
+        self.events.append (fish.Fish())
+        self.events.append (fish.Fish())
+        self.events.append (nothing.Nothing())
+        self.events.append (nothing.Nothing())
+
+
         
-    def enter(self):
-         while giant_monster_squid.GiantMonsterSquid() in self.events:
-            announce("'Deep Water': Something enormous is moving around you...")
-            
-         else:
-            announce('"Deep Water"')
+    def enter(self): 
+        announce("'Deep Water'")
+        announce("Something enormous is moving around you...")
             
 
     def process_verb (self, verb, cmd_list, nouns):
-        if(verb == "go east"):
+        if(verb == "east"):
             config.the_player.next_loc = self.main_location.locations["shark habitat"]
             announce ("You entered the new area of the empire.")
 
@@ -183,21 +258,33 @@ class DeepWater (location.SubLocation):
 
         elif(verb == "north"):
             config.the_player.next_loc = self.main_location.locations["treasure room"]
-            announce ("You entered the new area of the empire.")
+            
 
         elif(verb == "south"):
             config.the_player.next_loc = self.main_location.locations["hunting ground"]
             announce ("You entered the new area of the empire.")
-
-
+      
+        elif (verb == "give"):
+            # give medicine to crewmember
+            if (len(cmd_list) > 3):
+                if ((cmd_list[1] == "medicine") and (cmd_list[3] in nouns.keys())):
+                    if (Ship().medicine > 0):
+                        nouns[cmd_list[3]].receive_medicine(1)
+                        Ship().medicine =  Ship().medicine - 1
+                    else:
+                        announce ("no more medicine to give")
+            else:
+                announce ("Give medicine to who?")
+        else:
+            announce ("Error: Ship object doe not understand verb " + verb)
 class TreasureRoom (location.SubLocation):
     def __init__ (self, m):
         super().__init__(m)
         self.name = 'treasure room'
         
         self.verbs['exit'] = self
-        self.verbs['south'] = self
         self.verbs['take'] = self
+        self.verbs['give'] = self
         
         
         self.event_chance = 100
@@ -212,33 +299,43 @@ class TreasureRoom (location.SubLocation):
         else: 
             announce('"Treasure Room" ')
             if ship.get_treasure() < 5:
-                description = description + " You see a pile of treasures on the floor.Collect 5 treasures."
+                description = description + " You see a pile of treasures on the floor. Collect 5 treasures."
                 announce (description)
                 
     def process_verb (self, verb, cmd_list, nouns):
         ship = config.the_player.ship
-        if(verb == "south"):
-            config.the_player.next_loc = self.main_location.locations["deep water"]
-            announce ("You entered the new area of the empire.")
-
-        elif(verb == "exit"):
+        
+        if(verb == "exit"):
             config.the_player.next_loc = self.main_location.locations["beach"]
             announce ("You return to the beach.")
 
-        if verb == "take":
+        elif verb == "take":
             
             if ship.get_treasure() < 5:
                 announce ("You collect the treasure.")
                 amt = 1
                 ship.treasure =  ship.treasure + amt
-        
+                self.go = True
                 
             else:
                 announce ("You don't see anything to take.")
                 announce ("Enter command 'exit' to exit the empire.")
-            
+                
+        elif (verb == "give"):
+            if (len(cmd_list) > 3):
+                if ((cmd_list[1] == "medicine") and (cmd_list[3] in nouns.keys())):
+                    if (Ship().medicine > 0):
+                        nouns[cmd_list[3]].receive_medicine(1)
+                        Ship().medicine =  SHip().medicine - 1
+                    else:
+                        announce ("no more medicine to give")
+            else:
+                announce ("Give medicine to who?")
+        
+        else:
+         announce("THere's no such command")
                
-
+        
         
        # if(verb == "explore"):
            # config.the_player.next_loc = self.main_location.locations["hunting area"]

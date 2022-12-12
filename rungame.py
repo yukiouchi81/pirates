@@ -6,6 +6,7 @@
 #         - crew, crew's health
 
 from game import *
+from game.world import World
 
 ship_v     = ship.Ship()
 world_v    = world.World (ship_v)
@@ -14,7 +15,9 @@ ship_v.set_loc (start_loc)
 
 player_v   = player.Player(world_v, ship_v)
 
+config.the_player.get_world().get_manual()
 while (config.the_player.notdone()):
+    
     config.the_player.get_world().start_day ()
     config.the_player.process_day()
     config.the_player.get_world().end_day ()

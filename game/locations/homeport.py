@@ -3,6 +3,7 @@ from game import location
 import game.config as config
 from game.display import announce
 from game.player import Player
+from game.ship import Ship
 
 class HomePort (location.Location):
 
@@ -12,6 +13,11 @@ class HomePort (location.Location):
         self.symbol = 'H'
 
     def enter (self, ship):
-        config.the_player.gameInProgress = False
-        announce ("congratulations you've reached home and won")
-        Player.game_over()
+        ship = config.the_player.ship
+        if ship.get_treasure() < 5:
+            announce("You cannot return to the home port until you collect five treasures.")
+            
+        else:
+            config.the_player.gameInProgress = False
+            announce ("congratulations you've reached home and won")
+            Player.game_over()

@@ -68,11 +68,9 @@ class Player (Context):
             for j in range (0, self.world.worldsize):
                 self.seen[i].append(False)
                 
-    def nap_pod(self,amt):
-        for i in Player().pirates:
-            CrewMate().i.health = CrewMate().i.health + amt
-
+  
     def process_verb (self, verb, cmd_list, nouns):
+        ship = config.the_player.ship
         if (verb == "quit"):
             sys.exit(0)
         elif (verb == "map"):
@@ -137,19 +135,16 @@ class Player (Context):
 
             
         elif (verb == 'sleep') or (verb == 'rest') :
-            amt = random.randint(20,30)
-            #ship = config.the_player.ship
-            
-            
-            if ship.get_key() >= 1:
+            amt = random.randint(20,35)
+            if ship.get_pod() >= 1:
                 announce ("Crew members had a peaceful rest. Everyone's HP "+str(amt)+"up!")
-                nap_pod(amt)
-                
-                #crew = config.the_player.crewmate
-                #crew.health =  crew.health + amt
-                
-                for i in self.pirates:
-                    i.set_sickness (False)
+                for i in range(len(self.pirates)):
+                    self.pirates[i].health = self.pirates[i].health + amt
+                    self.pirates[i].set_sickness (False)
+                    if self.pirates[i].health > 100:
+                        self.pirates[i].health = 100
+                        
+                    
 
                 
             else:

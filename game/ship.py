@@ -93,6 +93,7 @@ class Ship (Context):
 
     def get_key(self):
         return self.key
+    
     def get_treasure(self):
         return self.treasure
 

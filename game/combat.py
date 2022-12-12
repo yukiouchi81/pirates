@@ -121,19 +121,19 @@ class Monster:
 class Sharks(Monster):
     def __init__ (self,name):
         attacks = {}
-        attacks["bite"] = ["bites",random.randrange(80,90), (5,15)]
-        attacks["bite2"] = ["bites",random.randrange(80,90), (5,15)]
-        attacks["tail attack"] = ["tail attack",random.randrange(30,40), (25,30) ]
+        attacks["bite"] = ["bites",random.randrange(80,90), (10,15)]
+        attacks["bite2"] = ["bites",random.randrange(80,90), (10,15)]
+        attacks["tail attack"] = ["tail attack",random.randrange(30,40), (15,20) ]
         #7 to 19 hp, bite attack, 160 to 200 speed (100 is "normal")
-        super().__init__(name, random.randrange(7,20), attacks, 180 + random.randrange(-20,21))
+        super().__init__(name, random.randrange(10,15), attacks, 180 + random.randrange(-20,21))
         #Methods of the parent class are called from the child class.
     
 class Macaque(Monster):
     def __init__ (self, name):
         attacks = {}
-        attacks["bite"] = ["bites",random.randrange(70,101), (10,20)]
+        attacks["bite"] = ["bites",random.randrange(70,100), (5,9)]
         #7 to 19 hp, bite attack, 160 to 200 speed (100 is "normal")
-        super().__init__(name, random.randrange(7,20), attacks, 180 + random.randrange(-20,21))
+        super().__init__(name, random.randrange(7,10), attacks, 200 + random.randrange(-20,21))
         #Methods of the parent class are called from the child class.
 class Drowned(Monster):
     def __init__ (self, name):
@@ -142,20 +142,20 @@ class Drowned(Monster):
         attacks["punch 1"] = ["punches",random.randrange(35,51), (1,10)]
         attacks["punch 2"] = ["punches",random.randrange(35,51), (1,10)]
         #7 to 19 hp, bite attack, 65 to 85 speed (100 is "normal")
-        super().__init__(name, random.randrange(7,20), attacks, 100 + random.randrange(-10,11))
+        super().__init__(name, random.randrange(15,20), attacks, 100 + random.randrange(-10,11))
 
 class Giant(Monster):
     def __init__(self,name):
         attacks = {}
         attacks["tackle"] = ["tackles",100, (25,35) ]
-        attacks["hydro cannon"] = ["bursts hydro cannon",random.randrange(40,50), (70,80) ]
+        attacks["hydro cannon"] = ["bursts hydro cannon",random.randrange(40,50), (65,80) ]
         
-        super().__init__(name, random.randrange(3,4), attacks, 250 + random.randrange(-10,11))
+        super().__init__(name, random.randrange(300,330), attacks, 250 + random.randrange(-10,11))
         
 class Merfolks(Monster):
     def __init__(self,name):
         attacks = {}
-        attacks["slash"] = ["slashes",100, (10,15) ]
-        attacks["slash2"] = ["slashes",100, (10,15) ]
-        attacks["supersonic wave"] = ["emits the supersonic wave",random.randrange(70,80), (25,30) ]
-        super().__init__(name, random.randrange(1,2), attacks, 130 + random.randrange(-10,11))
+        attacks["slash"] = ["slashes",random.randrange(30,40), (20,25) ]
+        attacks["supersonic wave"] = ["emits the supersonic wave",100, (5,15) ]
+        attacks["supersonic wave"] = ["emits the supersonic wave",100, (5,15) ]
+        super().__init__(name, random.randrange(30,50), attacks, 130 + random.randrange(-10,11))
