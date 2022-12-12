@@ -36,13 +36,3 @@ class GiantMonsterSquid(event.Event):
         #config.the_player.ship.food += n_appearing*2
 
 
-
-        
-""" if random.randrange(2) == 0:
-            result["newevents"] = [ self ]
-        else:
-            result["newevents"] = [ ]
-        config.the_player.ship.food += n_appearing*2
-        
-        return result
-"""
