@@ -39,7 +39,7 @@ class Merfolk (event.Event):
         #config.the_player.ship.nappod += 1
         
         
-        amt = random.randrange(1,5)
+        amt = random.randrange(1,3)
         ship = config.the_player.ship
         ship.nappod =  ship.nappod + amt
         result["message"] = "\nYou obtained " +str(ship.nappod)+" water-proof nap pod from the corpse of merfolks.\nYou can use a nap pod with rest or sleep command."

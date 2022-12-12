@@ -52,7 +52,7 @@ class World (Context):
         self.locs[self.startx+1][self.starty] = whirl
 
         #Test island: always start off next to a test island. Swap in your island to test yours.
-        testIsland= underwaterempire.UnderwaterEmpire (self.startx, self.starty+1, self)
+        testIsland= homeport.HomePort (self.startx, self.starty+1, self)
 
         self.locs[self.startx][self.starty+1] = testIsland
 
@@ -60,11 +60,9 @@ class World (Context):
         self.events.append (nothing.Nothing())
         self.events.append (nothing.Nothing())
         self.events.append (nothing.Nothing())
-        self.events.append (nothing.Nothing())
         self.events.append (seagull.Seagull())
         self.events.append (seagull.Seagull())
         self.events.append (sickness.Sickness())
-        self.events.append (lucky.LuckyDay())
         self.events.append (lucky.LuckyDay())
         self.events.append (drowned_pirates.DrownedPirates())
         

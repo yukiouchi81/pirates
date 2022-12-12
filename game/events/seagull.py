@@ -23,7 +23,7 @@ class Seagull (Context, event.Event):
             self.result["message"] = "the seagulls fly off."
             self.go = True
                 
-        if (verb == "kill"):
+        elif (verb == "kill"):
             
             self.result["newevents"].append (Seagull())
             self.result["message"] = "You killed the seagulls and procured food."

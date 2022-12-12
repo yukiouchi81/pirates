@@ -1,4 +1,3 @@
-
 import random
 from game.display import announce
 from game.items import *
@@ -9,11 +8,11 @@ class CrewMate(Context):
     '''Describes a pirate crewmate. The player controls these.'''
 
     # possible_names = ['alice', 'bob', 'charlie', 'darren', 'eliza', 'francine', 'gale', 'hope']
-    possible_names = ['American', 'French', 'Canadian', 'Spanish', 'Japanese', 'Italian', 'Korean', 'Taiwanese', 'Mexican',
-                      'Nepali', 'Indian', 'Pakistani', 'German', 'Portuguese', 'British', 'Australian', 'Finnish', 'Irish',
-                      'Swedish', 'Dutch', 'Swiss', 'Greek', 'Croatian', 'Russian', 'Polish', 'Brazilian', 'Turkish',
-                      'Bangladeshi', 'Chinese', 'Cambodian', 'Vietnamese', 'Egyptian', 'Ivorian', 'Nigerian', 'Ethiopian', 'South African',
-                      'Ukrainian', 'Danish', 'Colombian', 'Indonesian', 'Philipino', 'Saudi Arabian']
+    possible_names = ['Yuki','Mansi','Moeka','Nanako','Haley','Anushri','Lucy','Koto','Moena','Nonoka','Yazaki','Arika','Momo','Momoka','Zune',
+                      'Sumeet','Kushal','Yuteen','Pasang','Mao','Rumi','Jamal',"Tuna","Kotoha","Aakrit","Laraib","Anshika","Chandana","Rekha",
+                      "Nilay","Pratyush","Shunya","Devon","Caleb","Rachel","Stacy","Alexa","Ranial","Erick","Whitney","Manush","Karin","Yuri",
+                      "Saravuth","Guffera","Sulin","Aakrit","Sandesh","Yugesh","Bikash","Sanju","Riho","Sana","Arzu","Peter","Kathy","Heather",
+                      "Oscar","Mia","Aspine","Madd","Dhruv","Dhir","Manasi"]
     longest_name = max([len(c) for c in possible_names] )
     
     def __init__ (self):
@@ -22,7 +21,7 @@ class CrewMate(Context):
         CrewMate.possible_names.remove (self.name)
         self.max_health = 100
         self.death_cause = "" #track cause of death for the score log
-        self.health = self.max_health
+        self.health = self.max_health 
         #speed and move points for combat
         self.speed = 100 + random.randrange(-20,21)
         self.cur_move = 0
