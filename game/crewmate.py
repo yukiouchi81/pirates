@@ -5,7 +5,6 @@ from game.items import *
 from game.context import Context
 from game import config
 
-
 class CrewMate(Context):
     '''Describes a pirate crewmate. The player controls these.'''
 
@@ -39,7 +38,6 @@ class CrewMate(Context):
         self.items = []
         self.items.append(Cutlass())
         self.items.append(Flintlock())
-        self.items.append(Food())
         self.powder = 32
 
         #Status effects
@@ -76,7 +74,9 @@ class CrewMate(Context):
             return False
         self.death_cause = deathcause
         return True
-
+    
+   
+        
     def get_hunger (self):
         '''Sick pirates need more food.'''
         if (self.sick):

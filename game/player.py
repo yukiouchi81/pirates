@@ -9,6 +9,7 @@ import game.config as config
 from game.items import *
 import sys
 import datetime
+from game.ship import Ship
 
 class Player (Context):
 
@@ -66,7 +67,10 @@ class Player (Context):
             self.seen.append ([])
             for j in range (0, self.world.worldsize):
                 self.seen[i].append(False)
-
+                
+    def nap_pod(self,amt):
+        for i in Player().pirates:
+            CrewMate().i.health = CrewMate().i.health + amt
 
     def process_verb (self, verb, cmd_list, nouns):
         if (verb == "quit"):
@@ -134,14 +138,22 @@ class Player (Context):
             
         elif (verb == 'sleep') or (verb == 'rest') :
             amt = random.randint(20,30)
-            if 'tent' in self.inventory:
-                announce ("Crew members had a peaceful rest and recovered from sickness.")
-                crewmate.CrewMate().health = crewmate.CrewMate().health + amt
+            #ship = config.the_player.ship
+            
+            
+            if ship.get_key() >= 1:
+                announce ("Crew members had a peaceful rest. Everyone's HP "+str(amt)+"up!")
+                nap_pod(amt)
+                
+                #crew = config.the_player.crewmate
+                #crew.health =  crew.health + amt
+                
                 for i in self.pirates:
                     i.set_sickness (False)
+
                 
-                config.the_player.ship.nappod -= 1
             else:
+                print("You only have"+str(ship.nappod) +"nap pod.")
                 announce("You need a nap pod to do that.")
                 
             
@@ -216,6 +228,8 @@ class Player (Context):
 
     def times_up (self):
         self.gameInProgress = False
+        
+   
 
     def status (self):
         announce ("The ship is at location ", end="",pause=False)
@@ -223,6 +237,11 @@ class Player (Context):
         announce (str(loc.get_x()) + ", " + str(loc.get_y()),pause=False)
         announce ("Food stores are at: " + str (self.ship.get_food()),pause=False)
         announce ("Powder stores are at: " + str (self.powder//self.CHARGE_SIZE) + " cannon " + str (self.powder%self.CHARGE_SIZE) + " sidearm",pause=False)
+        announce ("Nap pod: "+str(self.ship.get_pod()),pause=False)
+        announce ("Key: " + str (self.ship.get_key()) ,pause=False)
+        announce ("Treasure: " + str (self.ship.get_treasure()) ,pause=False)
+
+        
         self.ship.print ()
         for crew in self.get_pirates():
             crew.print()
@@ -232,9 +251,11 @@ class Player (Context):
         for crew in self.get_pirates():
             crew.print()
 
-
+        
     def get_ship (self):
         return self.ship
+    
+    
 
     def get_world(self):
         return self.world

@@ -1,46 +1,43 @@
+
 from game import event
 import random
 from game.combat import Combat
-from game.combat import Shark
+from game.combat import Sharks
 from game.display import announce
-from game.player import Player
 import game.config as config
-
+from game.player import Player
+from game.context import Context
 class Shark (event.Event):
 
     def __init__ (self):
-        self.name = "Shark attack"
+        self.name = "shark attack"
+        
 
     def process (self, world):
         result = {}
-        result["message"] = "the flock of sharks is defeated!"
+        result["message"] = "The lock of sharks are defeated!"
         
         monsters = []
-        min = 7
-        uplim = 8
+        min = 5
+        uplim = 6
         if random.randrange(2) == 0:
-            min = 1
+            min = 4
             uplim = 5
-            monsters.append(Shark("Hammerhead shark"))
-            monsters[0].speed = 2*monsters[0].speed
+            monsters.append(Sharks("Hammerhead shark"))
+            monsters[0].speed = 1.5*monsters[0].speed
             monsters[0].health = 3*monsters[0].health
         n_appearing = random.randrange(min, uplim)
         n = 1
-        while n <= n_appearing: 
-            monsters.append(Shark("Shark "+str(n)))
+        while n <= n_appearing:
+            monsters. append(Sharks("Shark"+str(n)))
             n += 1
         announce ("You are attacked by a flock of sharks!")
         Combat(monsters).combat()
         result["newevents"] = [self]
-       # x = random.randint(1,5)
-        #config.the_player.ship.medicine += x
+        amt = random.randint(1,5)
+        ship = config.the_player.ship
+        ship.medicine =  ship.medicine + amt
+        result["message"] = "You obtained medicine from the corpse of sharks."
+
         return result
-
-
-        
-
-        
-
-       # result["message"] = "You obtained the a water-proof nap pod from the corpse of merfolks."
-
 

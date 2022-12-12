@@ -4,6 +4,8 @@ from game import config
 from game.display import announce
 from game.items import Cutlass
 from game.items import Flintlock
+from game.ship import Ship
+from game.player import Player
 
 class UnderwaterEmpire(location.Location):
     def __init__(self,x,y,w):
@@ -38,7 +40,7 @@ class Beach_with_ship (location.SubLocation):
         self.verbs['south'] = self
         
         self.event_chance = 50
-        #self.events.append (seagull.Seagull())
+        self.events.append (seagull.Seagull())
         #self.events.append(drowned_pirates.DrownedPirates())
 
     def enter (self):
@@ -69,8 +71,11 @@ class HuntingGround(location.SubLocation):
         self.verbs['east'] = self
         self.verbs['north'] = self
         self.verbs['west'] = self
-        
-        
+
+        self.event_chance = 50
+        self.events.append (seagull.Seagull())
+        #self.events.append(drowned_pirates.DrownedPirates())
+
     def enter(self):
         announce('"Hunting Ground"')
 
@@ -86,7 +91,7 @@ class HuntingGround(location.SubLocation):
             announce ("You entered the new area of the empire.")
         elif(verb == "south"):
             config.the_player.next_loc = self.main_location.locations["beach"]
-            announce ("You entered the new area of the empire.")
+            announce ("You return to the beach..")
         
             
 
@@ -129,7 +134,7 @@ class SharkHabitat (location.SubLocation):
         self.verbs['north'] = self
         #self.verbs['south'] = self
         
-        self.event_chance = 50
+        self.event_chance = 30
         self.events.append(shark.Shark())
     def enter(self):
         announce('"Shark Habitat"')
@@ -158,8 +163,14 @@ class DeepWater (location.SubLocation):
         
         self.event_chance = 100
         self.events.append(giant_monster_squid.GiantMonsterSquid())
+        
     def enter(self):
-        announce('"Deep Water"')
+         while giant_monster_squid.GiantMonsterSquid() in self.events:
+            announce("'Deep Water': Something enormous is moving around you...")
+            
+         else:
+            announce('"Deep Water"')
+            
 
     def process_verb (self, verb, cmd_list, nouns):
         if(verb == "go east"):
@@ -185,24 +196,49 @@ class TreasureRoom (location.SubLocation):
         self.name = 'treasure room'
         
         self.verbs['exit'] = self
-        self.verbs['explore'] = self
-        self.verbs['take'] = self
         self.verbs['south'] = self
+        self.verbs['take'] = self
+        
         
         self.event_chance = 100
-        self.events.append(giant_monster_squid.GiantMonsterSquid())
+       
     def enter(self):
-        announce('"Treasure Room" : Try to explore the room."')
-
+        ship = config.the_player.ship
+        description = ""
+        if ship.get_key() < 1:
+            announce("The area is locked. You need a key to the next area.")
+            config.the_player.location = self.main_location.locations["deep water"]
+            
+        else: 
+            announce('"Treasure Room" ')
+            if ship.get_treasure() < 5:
+                description = description + " You see a pile of treasures on the floor.Collect 5 treasures."
+                announce (description)
+                
     def process_verb (self, verb, cmd_list, nouns):
-        
+        ship = config.the_player.ship
         if(verb == "south"):
             config.the_player.next_loc = self.main_location.locations["deep water"]
             announce ("You entered the new area of the empire.")
 
         elif(verb == "exit"):
-            config.the_player.next_loc = self.main_location.locations["hunting ground"]
+            config.the_player.next_loc = self.main_location.locations["beach"]
             announce ("You return to the beach.")
+
+        if verb == "take":
+            
+            if ship.get_treasure() < 5:
+                announce ("You collect the treasure.")
+                amt = 1
+                ship.treasure =  ship.treasure + amt
+        
+                
+            else:
+                announce ("You don't see anything to take.")
+                announce ("Enter command 'exit' to exit the empire.")
+            
+               
+
         
        # if(verb == "explore"):
            # config.the_player.next_loc = self.main_location.locations["hunting area"]

@@ -57,11 +57,11 @@ class World (Context):
 
         self.events = []
         #self.events.append(merfolk.Merfolk())
-        #self.events.append (nothing.Nothing())
+        self.events.append (nothing.Nothing())
         #self.events.append (nothing.Nothing())
         #self.events.append (seagull.Seagull())
         #self.events.append (sickness.Sickness())
-        self.events.append (man_eating_monkeys.Shark())
+        #self.events.append (man_eating_monkeys.ManEatingMonkeys())
         #self.events.append (giant_monster_squid.GiantMonsterSquid())
         #self.events.append (drowned_pirates.DrownedPirates())
         #self.events.append (shark.Shark())

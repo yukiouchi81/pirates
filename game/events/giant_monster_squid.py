@@ -3,7 +3,7 @@ from game.combat import Combat
 from game.combat import Giant
 from game.display import announce
 import game.config as config
-
+from game.ship import Ship
 class GiantMonsterSquid(event.Event):
     def __init__(self):
         self.name = "Giant moster squid attack"
@@ -21,7 +21,18 @@ class GiantMonsterSquid(event.Event):
         announce ("The crew is attacked by a giant monster squid!")
         Combat(monsters).combat()
         result["newevents"] = []
+        
+        
+        
+        amt = 1
+        ship = config.the_player.ship
+        ship.key =  ship.key + amt
+        result["message"] = "There's something by the monster's corpse ... you obtained a kay!!"
+        
+        
         return result
+
+
         #config.the_player.ship.food += n_appearing*2
 
 
