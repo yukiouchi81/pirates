@@ -21,7 +21,6 @@ class Fish (Context, event.Event):
         if (verb == "chase"):
             self.go = True
             self.result["message"] = "the fish swim away."
-                
             self.result["newevents"].append (Fish())
         if(verb == "kill"):
             self.go = True
