@@ -36,7 +36,6 @@ class Merfolk (event.Event):
         Combat(monsters).combat()
         
         result["newevents"] = [self]
-        #config.the_player.ship.nappod += 1
         
         
         amt = random.randrange(1,3)
