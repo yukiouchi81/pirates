@@ -57,8 +57,9 @@ class Whirlpool (Context, location.Location):
                 print ("The ship was destroyed in the whirlpool")
             else:
                 print ("The ship is somehow holding together")
+            
             self.go = True
-    
+            
     def start_day (self):
         if (self.ship != None):
             self.go = False

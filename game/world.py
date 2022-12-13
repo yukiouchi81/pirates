@@ -69,7 +69,7 @@ class World (Context):
         self.nouns["world"] = self
         
     def get_manual(self):
-        print( "\nYour ship and crew members left your home port in serch of treasures.\nCollect treasures and come back alive!!\nBasic commands : 'go + direction' / 'map' / 'inventory' / 'go ashore'\n")
+        print( "\nYour ship and crew members left your home port in serch of treasures.\nCollect treasures and come back alive!!\nBasic commands : 'go + direction' / 'map' /'status'/ 'inventory' / 'go ashore'\n")
 
     def get_day (self):
         return self.day

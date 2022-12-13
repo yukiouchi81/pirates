@@ -147,8 +147,9 @@ class Merfolk_dwelling (location.SubLocation):
         
         self.event_chance = 100
         self.events.append(merfolk.Merfolk())
-        #self.events.append (fish.Fish())
-        #self.events.append (nothing.Nothing())
+        self.events.append(merfolk.Merfolk())
+        self.events.append (fish.Fish())
+        self.events.append (nothing.Nothing())
 
     def enter(self):
         announce('"Dwelling of Merfolk"')
@@ -190,10 +191,11 @@ class SharkHabitat (location.SubLocation):
         #self.verbs['south'] = self
         self.verbs['give'] = self
         
-        self.event_chance = 30
+        self.event_chance = 80
         self.events.append(shark.Shark())
         self.events.append(shark.Shark())
         self.events.append (fish.Fish())
+        self.events.append (nothing.Nothing())
     def enter(self):
         announce('"Shark Habitat"')
 
@@ -233,7 +235,7 @@ class DeepWater (location.SubLocation):
         self.verbs['give'] = self
         
         
-        self.event_chance = 100
+        self.event_chance = 80
         self.events.append(giant_monster_squid.GiantMonsterSquid())
         self.events.append (fish.Fish())
         self.events.append (fish.Fish())
